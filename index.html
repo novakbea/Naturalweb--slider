@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+Copyright (c) 2017 by novakbea (https://jsbin.com/vibufig/1/edit?html,output)
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta name="description" content="2017 Naturalweb-slideshow">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+  
+<style id="jsbin-css">
+*{
+  margin: 0;
+  padding: 0;
+}
+body {
+    background-color:#ecfecd;
+}
+h1 {
+    color: #45200d;
+    opacity: 0.8;
+    font-size: 300%;
+    text-align: center;
+    font-family: 'Pacifico', cursive;
+    text-shadow: 3px 3px 5px ;
+    font-style: oblique;
+}
+#slider {
+    width: 720px;
+    height: 400px;
+    overflow: hidden;
+    margin-left:auto;
+    margin-right: auto;
+    border:3px solid white;
+    box-shadow: 30px 30px 110px black;
+    border-radius: 7px;
+    
+}
+#slider .slides {
+    display: block;
+    width: 21120px;
+    height: 400px;
+    margin: 0;
+    padding: 0;
+}
+#slider .slide {
+    float: left;
+    list-style-type: none;
+    width: 720px;
+    height: 400px;
+   
+}
+</style>
+</head>
+<body>
+<div class="container">
+            <div class="header">
+              <br>  
+              <br>
+              <h1 class="text-muted">Naturalweb</h1>
+            </div>
+            <br>
+            <br>
+            <div id="slider">
+                <ul class="slides">
+                    <li class="slide slide3"><img src="https://i.imgur.com/Zq6zast.jpg"></li>
+                    <li class="slide slide2"><img src="https://i.imgur.com/JCmAgct.jpg"></li>
+                    </ul>
+            </div>
+        </div>
+<script id="jsbin-javascript">
+$(function() {
+    //settings for slider
+    var width = 720;
+    var animationSpeed = 1200;
+    var pause = 5000;
+    var currentSlide = 1;
+    //cache DOM elements
+    var $slider = $('#slider');
+    var $slideContainer = $('.slides', $slider);
+    var $slides = $('.slide', $slider);
+    var interval;
+    function startSlider() {
+        interval = setInterval(function() {
+            $slideContainer.animate({'margin-left': '-='+width}, animationSpeed, function() {
+                if (++currentSlide === $slides.length) {
+                    currentSlide = 1;
+                    $slideContainer.css('margin-left', 0);
+                }
+            });
+        }, pause);
+    }
+    function pauseSlider() {
+        clearInterval(interval);
+    }
+    $slideContainer
+        .on('mouseenter', pauseSlider)
+        .on('mouseleave', startSlider);
+    startSlider();
+});
+</script>
+</body>
+</html>
